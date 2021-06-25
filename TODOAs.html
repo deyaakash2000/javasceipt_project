@@ -1,0 +1,146 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+    <title>Hello, world!</title>
+</head>
+
+<body>
+    <div class="container">
+        <h2 class="text-center my-4">
+            <!-- text-center use to set text-items in the center of any page -->
+            TODOs LIST
+        </h2>
+
+            <div class="form-group">
+                <label for="title">Title</label>
+                <input type="email" class="form-control" id="title" aria-describedby="emailHelp"
+                    placeholder="Enter title">
+                <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone
+                    else.</small>
+            </div>
+            <div class="form-group">
+                <label for="Description">Description</label>
+                <textarea class="form-control" id="Description" rows="3"></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary"id="add">Submit</button>
+      
+    </div>
+
+
+    <div class="itmes my-3 text-center">
+    <h2>Your itmes</h2>
+    <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">Sno</th>
+            <th scope="col">item title</th>
+            <th scope="col">item Description</th>
+            
+          </tr>
+        </thead>
+        <tbody id="tbody">
+          <tr>
+            <th scope="row">1</th>
+            <td></td>
+            <td> </td>
+            <td><button class="btn btn-primary">Delete</button></td>
+          </tr>
+          <!-- <tr>
+            <th scope="row">2</th>
+            <td>Chickne</td>
+            <td> Made by special ingredient and masalas</td>
+           <td><button class="btn btn-primary">Delete</button></td>
+          </tr>
+          <tr>
+            <th scope="row">3</th>
+            <td>Biryani</td>
+            <td>Made by special ingredient and masalas</td>
+            <td><button class="btn btn-primary">Delete</button></td>
+          </tr>
+        </tbody> -->
+      </table>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+        integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+        crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+        crossorigin="anonymous"></script>
+</body>
+<script>
+    add =document.getElementById('add');
+    add.addEventListener('click',function(){
+        // console.log('updating')
+        tit=document.getElementById('title').value
+        desc=document.getElementById('Description').value
+        if (localStorage.getItem('itemsjson')==null) {
+            items=[];
+            items.push([tit,desc])
+            localStorage.setItem('itemsjson',JSON.stringify(items))
+        }else{
+            itemsstr=localStorage.getItem('itemsjson')
+            items=JSON.parse(itemsstr);
+            items.push([tit,desc])
+            localStorage.setItem('itemsjson',JSON.stringify(items))
+
+        }
+
+        //updating the table
+        tbody=document.getElementById('tbody');
+        let str = ""
+        items.forEach((element , index) => {
+            str += `
+            <tr>
+            <th scope="row">${index+1}</th>
+            <td>${element[0]}</td>
+            <td> ${element[1]}</td>
+           <td><button class="btn btn-primary">Delete</button></td>
+             </tr>`;
+            
+        });
+        tbody.innerHTML=str
+    })
+</script>
+
+</html>
